@@ -1,0 +1,215 @@
+html,
+body {
+  box-sizing: border-box;
+}
+body {
+  font:
+    14px "Lucida Grande",
+    Helvetica,
+    Arial,
+    sans-serif;
+  background-color: #111;
+  color: white;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  height: 63px;
+  text-align: center;
+}
+
+header span {
+  color: #fff;
+  margin: 0 auto;
+  text-align: center;
+  font-family: "Kyiv*Type Serif";
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 350;
+  line-height: normal;
+}
+
+header button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+dialog {
+  height: 100%;
+  width: 200px;
+  position: relative;
+  background-color: black;
+  margin-left: 0;
+  animation-name: slide-in;
+  animation-duration: 0.5s;
+  animation-delay: 0;
+  animation-iteration-count: 1;
+}
+
+dialog ul {
+  margin-top: 70px;
+  padding-left: 0;
+}
+
+dialog li {
+  margin-bottom: 20px;
+}
+
+.closeDialog {
+  position: absolute;
+  font-size: 30px;
+  top: 20px;
+  right: 10px;
+}
+
+.slide-left {
+  animation-name: slide-out;
+  animation-duration: 0.8s;
+  animation-delay: 0;
+  animation-iteration-count: 1;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-800px);
+  }
+}
+
+.post {
+  padding: 10px;
+  border: 1px solid whitesmoke;
+}
+
+.message {
+  line-height: 1.2rem;
+  max-width: 500px;
+  text-wrap: pretty;
+}
+
+form {
+  display: flex;
+  width: 500px;
+  flex-direction: column;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 17px;
+  gap: 2px;
+  position: relative;
+}
+label {
+  font-size: 1.2rem;
+  font-weight: 900;
+  transform: translate(10px, -35px);
+  transition: transform 0.1s ease-in-out;
+  color: gray;
+  z-index: 1;
+}
+
+.form-control {
+  padding: 10px 10px;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 2px darkcyan;
+  font-size: 1.3rem;
+}
+
+.form-control:focus + label,
+.form-control:valid + label {
+  transform: translate(
+    35px,
+    -75px
+  ); /* Adjust the translation values as needed */
+  font-size: 1.2rem;
+  color: darkcyan;
+}
+
+.form-title {
+  font-size: 2.5rem;
+  align-self: center;
+}
+
+.btn-submit {
+  background: linear-gradient(29deg, darkcyan, transparent);
+  border-color: whitesmoke;
+  border-radius: 7px;
+  padding: 20px 40px;
+  color: white;
+  font-weight: 900;
+  transition: transform 0.1s ease-in-out;
+  align-self: center;
+  margin-top: 10px;
+  font-size: 1.3rem;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  cursor: pointer;
+}
+a {
+  color: #00b7ff;
+  font-size: 1.5rem;
+}
+
+.errorMsg {
+  color: red;
+  font-size: 1.1rem;
+}
+
+@media only screen and (max-width: 500px) {
+  main {
+  }
+
+  form {
+    width: 98%;
+  }
+
+  .btn-submit {
+    padding: 20px 80px;
+    margin-top: 20px;
+  }
+
+  label {
+    transform: translate(20px, -42px);
+  }
+
+  .form-control {
+    padding: 15px 15px;
+  }
+
+  .form-control:focus + label,
+  .form-control:valid + label {
+    transform: translate(35px, -90px);
+    font-size: 1.2rem;
+    color: darkcyan;
+  }
+}

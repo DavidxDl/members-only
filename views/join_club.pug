@@ -1,0 +1,14 @@
+extends layout
+
+
+block content
+  h1= title
+
+  form(method="POST" style="margin-top: 40px;")
+    div.form-group
+      input(type="password" id="passcode" name="passcode" class="form-control")
+      label(for="passcode") Passcode
+    if error
+      ul
+        li(style="color:red;")= error
+    button.btn-submit submit

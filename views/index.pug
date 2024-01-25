@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  if user
+    h2 👋 Welcome  #{user.fullname}
+    h2(style="text-align: center; font-size: 28px") Posts
+    div(class="posts")
+      hr(style="width:100%;")
+      div(class="post")
+        h2 this is the title
+        p #[strong @Club Member]
+        p
+          time= new Date()
+        p(class="message") Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.
+      div(class="posts")
+        div(class="post")
+          h2 this is the title
+          p #[strong @Club Member]
+          p
+          time= new Date()
+          p(class="message") Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.
+
+  else
+    form(action="/log-in" method="POST")
+      h2.form-title(style="align-self: center") Log in
+      div(class="form-group")
+        input(type="text" id="username" name="username" class="form-control" required)
+        label(for="username") Username:
+      div(class="form-group")
+        input(autoomplete="false" class="form-control" type="password" name="password" id="password" required)
+        label(for="password") Password:
+      button.btn-submit Log in
+    p you dont have a account?
+    a(href="/sign-up") Sign up
+
