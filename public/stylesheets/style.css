@@ -20,6 +20,7 @@ main {
 }
 
 header {
+  position: relative;
   display: flex;
   align-items: center;
   height: 63px;
@@ -53,7 +54,7 @@ header button {
 dialog {
   height: 100%;
   width: 200px;
-  position: relative;
+  position: fixed;
   background-color: black;
   margin-left: 0;
   animation-name: slide-in;
