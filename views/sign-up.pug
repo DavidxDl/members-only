@@ -10,7 +10,7 @@ block content
       id="name"
       required
       class="form-control")
-      label(for="name") Name:
+      label.form-label(for="name") Name:
     div.form-group
       input(value=user===undefined ? "" : user.last_name
       type="text"
@@ -18,7 +18,7 @@ block content
       id="last_name"
       name="last_name"
       required)
-      label(for="last_name") Last Name:
+      label.form-label(for="last_name") Last Name:
     div.form-group
       input(value=user===undefined ? "" : user.username
       type="text"
@@ -26,7 +26,7 @@ block content
       id="username"
       name="username"
       required)
-      label(for="username") Username:
+      label.form-label(for="username") Username:
     div.form-group
       input(value=user===undefined ? "" : user.password
       type="password"
@@ -34,7 +34,7 @@ block content
       name="password"
       id="password"
       required)
-      label(for="password") Password:
+      label.form-label(for="password") Password:
     div.form-group
       input(value=user===undefined ? "" : user.confirm_password
       type="password"
@@ -42,7 +42,7 @@ block content
       name="confirm_password"
       id="confirm_password"
       required)
-      label(for="confirm_password") Confirm Password:
+      label.form-label(for="confirm_password") Confirm Password:
     if errors
       ul
         each err in errors

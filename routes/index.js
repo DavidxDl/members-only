@@ -6,19 +6,89 @@ const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 
 const User = require("../models/User");
+const Post = require("../models/post");
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  console.log(req.user?.status);
-  res.render("index", { title: "Express", user: req.user });
+router.get(
+  "/",
+  asyncHandler(async (req, res, next) => {
+    const posts = await Post.find().populate("username");
+    res.render("index", { title: "Home", user: req.user, posts: posts });
+  })
+);
+
+router.get(
+  "/post/:id/delete",
+  asyncHandler(async (req, res, next) => {
+    const post = await Post.findById(req.params.id);
+    res.render("post_delete", {
+      title: "Delete Post",
+      user: req.user,
+      post: post,
+    });
+  })
+);
+
+router.post(
+  "/post/:id/delete",
+  asyncHandler(async (req, res, next) => {
+    const post = await Post.findById(req.params.id);
+    if (post === null) {
+      const error = new Error("post not found");
+      res.statusCode = 404;
+      return next(error);
+    }
+    await Post.findByIdAndDelete(req.params.id);
+    res.redirect("/");
+  })
+);
+
+router.get("/posts/create", (req, res, next) => {
+  res.render("post_create", { title: "Create Post", user: req.user });
 });
+
+router.post("/posts/create", [
+  body("title", "Title must at least have 4 characters")
+    .trim()
+    .isLength({ min: 4 })
+    .escape(),
+
+  body("message", "message must at least have 7 characters")
+    .trim()
+    .isLength({ min: 7 })
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    if (!req.user) return res.redirect("/");
+    const errors = validationResult(req);
+    console.log(req.user);
+    const post = new Post({
+      title: req.body.title,
+      timestamp: new Date(),
+      username: req.user._id,
+      text: req.body.message,
+    });
+
+    if (!errors.isEmpty()) {
+      res.render("post_create", {
+        title: "Create Post",
+        user: req.user,
+        post: post,
+        errors: errors.array(),
+      });
+      return;
+    }
+    await post.save();
+    res.redirect("/");
+  }),
+]);
 
 router.post(
   "/log-in",
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/",
-  }),
+  })
 );
 
 router.get("/log-out", (req, res, next) => {
@@ -54,7 +124,7 @@ router.post("/sign-up", [
     .escape(),
 
   body("confirm_password", "Passwords dont match").custom(
-    (value, { req }) => value === req.body.password,
+    (value, { req }) => value === req.body.password
   ),
 
   asyncHandler(async (req, res, next) => {
@@ -93,7 +163,7 @@ router.get(
   "/join_club",
   asyncHandler(async (req, res, next) => {
     res.render("join_club", { title: "Join Club", user: req.user });
-  }),
+  })
 );
 
 router.post("/join_club", [
@@ -112,4 +182,26 @@ router.post("/join_club", [
   }),
 ]);
 
+router.get(
+  "/get_admin",
+  asyncHandler(async (req, res, next) => {
+    res.render("get_admin", { title: "Join Club", user: req.user });
+  })
+);
+
+router.post("/get_admin", [
+  body("admin_code").trim(),
+
+  asyncHandler(async (req, res, next) => {
+    if (req.user === undefined) return res.redirect("/");
+    const user = await User.findById(req.user._id);
+
+    if (req.body.admin_pass !== process.env.ADMIN_PASS) {
+      res.render("get_admin", { title: "Get Admin", error: "Wrong code!" });
+      return;
+    }
+    await User.findByIdAndUpdate(req.user._id, { $set: { admin: "true" } });
+    res.redirect("/");
+  }),
+]);
 module.exports = router;

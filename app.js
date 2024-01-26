@@ -34,7 +34,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-  }),
+  })
 );
 passport.use(
   new localStrategy(async (username, password, done) => {
@@ -42,14 +42,15 @@ passport.use(
       const user = await User.findOne({ username: username });
       if (!user)
         return done(null, false, { message: "Invalid Username or Password" });
-      const match = bcrypt.compare(password, user.password);
+      const match = await bcrypt.compare(password, user.password);
+      console.log(match);
       if (!match)
         return done(null, false, { message: "Invalid Username or Password" });
       return done(null, user);
     } catch (err) {
       return done(err);
     }
-  }),
+  })
 );
 passport.serializeUser((user, done) => {
   done(null, user.id);

@@ -9,4 +9,8 @@ const postSchema = new Schema({
   username: { type: ObjectId, ref: "User", required: true },
 });
 
+postSchema.virtual("url").get(function () {
+  return `/post/${this._id}/delete`;
+});
+
 module.exports = mongoose.model("Post", postSchema);

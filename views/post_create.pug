@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+
+  form(method="POST" style="margin-top: 20px;")
+    div.form-group
+      input.form-control(value=post===undefined ? "" : post.title type="text" id="title" name="title" required autocomplete="false")
+      label.form-label(for="title") Title
+    div.form-group
+      label(for="message" style="text-align: center; font-size: 1.2rem; font-weight: 900;") Message
+      textarea.form-control-tex(id="message" name="message")= post===undefined ? "" : post.text
+    if errors && errors.length > 0
+       ul 
+         each err in errors
+           li(style="color:red; font-size: 1.2rem")= err.msg
+    button.btn-submit Create Post

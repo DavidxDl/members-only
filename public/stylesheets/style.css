@@ -28,13 +28,12 @@ header {
   height: 63px;
   text-align: center;
 }
-
-header span {
+.logo {
   color: #fff;
   margin: 0 auto;
   text-align: center;
   font-family: "Kyiv*Type Serif";
-  font-size: 30px;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 350;
   line-height: normal;
@@ -109,6 +108,7 @@ dialog li {
 .post {
   padding: 10px;
   border: 1px solid whitesmoke;
+  position: relative;
 }
 
 .message {
@@ -130,7 +130,7 @@ form {
   gap: 2px;
   position: relative;
 }
-label {
+.form-label {
   font-size: 1.2rem;
   font-weight: 900;
   transform: translate(10px, -35px);
@@ -142,12 +142,22 @@ label {
 .form-control {
   padding: 10px 10px;
   border-radius: 10px;
-  box-shadow: inset 0px 0px 2px darkcyan;
+  box-shadow: inset 1px 2px 10px darkcyan;
   font-size: 1.3rem;
 }
 
-.form-control:focus + label,
-.form-control:valid + label {
+.form-control-tex {
+  resize: none;
+  height: 100px;
+  box-shadow: inset 1px 2px 10px darkcyan;
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.3rem;
+}
+
+.form-control:focus + .form-label,
+.form-control:valid + .form-label {
   transform: translate(
     35px,
     -75px
@@ -189,11 +199,12 @@ a {
 }
 
 @media only screen and (max-width: 500px) {
-  main {
-  }
-
   form {
     width: 98%;
+  }
+
+  .form-group {
+    padding: 20px;
   }
 
   .btn-submit {
@@ -201,16 +212,20 @@ a {
     margin-top: 20px;
   }
 
-  label {
+  .form-label {
     transform: translate(20px, -42px);
+  }
+
+  .form-control-tex {
+    resize: none;
   }
 
   .form-control {
     padding: 15px 15px;
   }
 
-  .form-control:focus + label,
-  .form-control:valid + label {
+  .form-control:focus + .form-label,
+  .form-control:valid + .form-label {
     transform: translate(35px, -90px);
     font-size: 1.2rem;
     color: darkcyan;

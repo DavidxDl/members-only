@@ -1,0 +1,10 @@
+extends layout 
+
+block content
+  h1=title 
+
+  h2 you sure you want to delete the post with title: #{post.title}?
+
+  form(method="POST")
+    input(type="hidden" name="postid" value=post._id)
+    button.btn-submit(style="background-color: red;") Delete

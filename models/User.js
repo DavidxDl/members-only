@@ -7,15 +7,11 @@ const userSchema = new Schema({
   username: { type: String, min: 3 },
   password: String,
   status: String,
+  admin: Boolean,
 });
 
 userSchema.virtual("fullname").get(function () {
   return `${this.name} ${this.last_name}`;
-});
-
-userSchema.virtual("activateMembership").get(function () {
-  this.status = "active";
-  return;
 });
 
 module.exports = mongoose.model("User", userSchema);
