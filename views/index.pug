@@ -10,7 +10,7 @@ block content
         each post in posts
           div(class="post")
             if user.admin && user.admin === true
-              a(href=post.url style="position: absolute; right: 10px;") X
+              a(href=post.url style="position: absolute; right: 10px; text-decoration: none;") ❌
             h2= post.title
             if user.status === "active"
               p.username @#{post.username.username}

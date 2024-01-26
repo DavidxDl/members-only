@@ -27,16 +27,21 @@ header {
   align-items: center;
   height: 63px;
   text-align: center;
+  padding: 10px;
 }
 .logo {
   color: #fff;
   margin: 0 auto;
   text-align: center;
   font-family: "Kyiv*Type Serif";
-  font-size: 2rem;
+  font-size: 3rem;
   font-style: normal;
   font-weight: 350;
   line-height: normal;
+}
+
+.welcome {
+  font-size: 2rem;
 }
 
 header button {
@@ -47,6 +52,7 @@ header button {
 }
 
 .posts {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -199,6 +205,14 @@ a {
 }
 
 @media only screen and (max-width: 500px) {
+  .logo {
+    font-size: 2.5rem;
+  }
+  .welcome {
+    text-wrap: balance;
+    text-align: center;
+  }
+
   form {
     width: 98%;
   }
