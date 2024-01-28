@@ -174,7 +174,7 @@ router.post("/join_club", [
     const user = await User.findById(req.user._id);
 
     if (req.body.passcode !== process.env.PASSCODE) {
-      res.render("join_club", { title: "Join Club", error: "Wrong code!" });
+      res.render("join_club", { title: "Join Club", error: "Wrong code!", user: req.user });
       return;
     }
     await User.findByIdAndUpdate(req.user._id, { $set: { status: "active" } });
